@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bluestock Verification</title>
+  <style>
+    body { font-family: Arial; text-align:center; }
+
+    .hidden { display:none; }
+
+    .bar {
+      width: 80%;
+      height: 10px;
+      background: #ddd;
+      margin: 20px auto;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: blue;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      width: 300px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background: white;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 10px black;
+    }
+  </style>
+</head>
+
+<body onload="startLoading()">
+
+<!-- LOADING -->
+<div id="loading">
+  <h1>BLUESTOCK.in</h1>
+  <p>Loading just a second...</p>
+
+  <div class="bar">
+    <div id="progress" class="progress"></div>
+  </div>
+</div>
+
+<!-- VERIFY -->
+<div id="verify" class="hidden">
+  <div class="card">
+    <h2>Document Verification System</h2>
+    <input id="docId" placeholder="Enter Docs ID">
+    <button onclick="verify()">Verify Now</button>
+  </div>
+</div>
+
+<!-- POPUP -->
+<div id="popup" class="popup hidden"></div>
+
+<script>
+
+// LOADING
+function startLoading(){
+  let width = 0;
+  let bar = document.getElementById("progress");
+
+  let interval = setInterval(()=>{
+    width += 5;
+    bar.style.width = width + "%";
+
+    if(width >= 100){
+      clearInterval(interval);
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("verify").classList.remove("hidden");
+    }
+  },150);
+}
+
+// VERIFY
+function verify(){
+  let id = document.getElementById("docId").value;
+
+  if(id === "BSFDA1148"){
+    showPopup();
+  } else {
+    alert("Invalid ID");
+  }
+}
+
+// POPUP
+function showPopup(){
+  let popup = document.getElementById("popup");
+
+  popup.innerHTML = `
+    <h3>Document Verification Successful</h3>
+    <p><b>Name:</b> Sanjana Sutrave</p>
+    <p><b>Date:</b> 2026-03-11</p>
+    <p><b>Role:</b> Data Analyst Intern</p>
+    <p><b>Duration:</b> 11 March to 11 May</p>
+    <p><b>Remark:</b> Outstanding Performance</p>
+    <button onclick="closePopup()">Close</button>
+  `;
+
+  popup.classList.remove("hidden");
+}
+
+function closePopup(){
+  document.getElementById("popup").classList.add("hidden");
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
